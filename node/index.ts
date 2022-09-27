@@ -7,6 +7,8 @@ import {
   method,
 } from '@vtex/api'
 import { Clients } from './clients'
+import { fullfilmentSimulation } from './handlers/fulfillmentSimulation'
+import { placeOrder } from './handlers/orderPlacement'
 // import { analytics } from './handlers/analytics'
 import { resolvers } from './resolvers/shopify'
 
@@ -33,14 +35,15 @@ export default new Service<Clients, State, ParamsContext>({
       },
     },
   },
-  graphql:{
-    
+  graphql:{    
     resolvers,
-    
   },
-  // routes: {
-  //   analytics: method({
-  //     GET: [analytics],
-  //   }),
-  // },
+  routes: {
+    fullfilmentSimulation: method({
+      POST: fullfilmentSimulation,
+    }),
+    orderPlacement: method({
+      POST: placeOrder,
+    }),
+  },
 })

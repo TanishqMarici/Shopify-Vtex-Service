@@ -139,12 +139,15 @@ export const resolvers = {
                     ctx.status = 304
                     
                 } catch (e) {
-                    if (e.response.status === 404) {
+                    
+                    if ( //@ts-ignore 
+                        e.response.status === 404) {
                       suggestion.sendSkuSuggestion(item,token)            
                       ctx.body = 'Suggestion was successfully sent'
                       ctx.status = 200                
                     } else {
-                      // eslint-disable-next-line no-console
+                      // eslint-disable-next-line no-console 
+                     //@ts-ignore
                       console.log(`Error: ${e.response.message}`)
                     }
                   }
@@ -202,12 +205,13 @@ export const resolvers = {
                         
                         return myLogistics.updateInventoryBySkuIdAndWarehouseId(item.skuId,'1_1',item.inventory);
                     }catch(e){
+                        //@ts-ignore
                         console.log(`Error: ${e.response.message}`)
                     }
                })
 
             },
-            syncPricesWithMarketplace:async(_:any,
+        syncPricesWithMarketplace:async(_:any,
                 {
                     apiKey,
                     apiPassword,
@@ -260,6 +264,7 @@ export const resolvers = {
                             
                             return prices.updatePricesBySkuId(item.skuId,item.price,token);
                         }catch(e){
+                            //@ts-ignore
                             console.log(`Error: ${e.response.message}`)
                         }
                    })
